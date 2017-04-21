@@ -1,0 +1,19 @@
+<big><a href="http://citforum.ru/programming/unix/borovsky/" target="_blank">IPC</a></big>
+
+<a style="color:#FF0000;" href="http://citforum.ru/programming/unix/svid_ipc_objects/" target="_blank">Cообщения</a>
+Помните, что ключ нужен только для открытия очереди, а для работы с ней используется идентификатор.
+Обычно функция, читающая сообщение из очереди, приостанавливает выполнение программы до тех пор,
+пока извлечение сообщения не будет выполнено, то есть пока в очереди не появится сообщение ожидаемого типа.
+
+<a style="color:#FF0000;" href="http://citforum.ru/programming/unix/svid_ipc_objects/" target="_blank">Разделяемая память</a>
+Разделяемые блоки памяти представляют собой область памяти, отображенную адресное пространство нескольких процессов.
+
+<a style="color:#FF0000;" href="http://citforum.ru/programming/unix/ipc_intro/" target="_blank">Каналы(именованные и неименованные)</a>
+
+<a style="color:#FF0000;" href="" >Cистемные переменные</a>
+
+<a style="color:#FF0000;" href="http://citforum.ru/programming/unix/signals/" target="_blank">Cигналы</a>
+
+<a style="color:#FF0000;" href="http://citforum.ru/nets/ip/contents.shtml" target="_blank">Cеть</a>
+
+<a style="color:#FF0000;" href="" >Файлы</a>
