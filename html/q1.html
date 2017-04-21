@@ -1,0 +1,124 @@
+<html><!DOCTYPE html><head>
+            <meta charset="utf-8">
+            <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+            </head><body><ul>
+           <li><a href="q1.html">Q1</a></li>
+           <li><a href="q2.html">Q2</a></li>
+           <li><a href="q3.html">Q3</a></li>
+           <li><a href="patterns.html">Patterns</a></li>
+           <li><a href="ipc.html">IPC</a></li>
+           <li><a href="p_sync.html">p_sync</a></li>
+           <li><a href="smart_pointers.html">SmartPointers</a></li>
+           <li><a href="http://cpp.sh" target="_blank">CPP.SH</a></li>
+           </ul><h3><pre>1. <br/>Если структура имеет несколько атрибутов с типами int и char.
+Как Вы будете сравнивать экземпляры этих структур чтобы убедиться что атрибуты имеют одинаковые значения?
+</pre></h3><pre>struct Man
+{
+    char name;
+    int age;
+    char sex;
+    int weight;
+};
+
+Man a;
+Man b;
+
+if(a.name == b.name && a.age == b.age && a.sex == b.sex && a.weight == b.weight)
+{
+    std::cout << “equal”;
+}
+</pre><hr/><h3><pre>2. <br/>Напишите небольшой отрывок кода на C или C++ переполняющий стек.</pre></h3><pre>void foo()
+{
+	foo();
+}</pre><hr/><h3><pre>3. <br/>Напишите небольшой отрывок кода на C или C++ приводящий к ошибке сегментации.</pre></h3><pre>char *a;
+*a = 10;</pre><hr/><h3><pre>4. <br/>Напишите небольшой отрывок кода на C или C++ в котором есть утечка памяти.
+Она постепенно дожна приводить к израсходованию всех ресурсов.</pre></h3><pre>while(true)
+{
+	new int[10];
+}</pre><hr/><h3><pre>5. <br/>Есть указатель на один из элементов связного списка (a => b => c => d => e).
+Какой самый быстрый способ выяснить, есть ли цикл в этом связном списке (a => b => c => d => e => a)?</pre></h3><pre>class MyList
+{
+public:
+    MyList* next;
+    MyList(): next(NULL)
+    {}
+};
+
+bool isCycle(MyList* head)
+{
+    MyList* i1 = head;
+    MyList* i2 = head->next;
+    //i2 бежит в 2 раза быстрее чем i1
+    
+    while (NULL != i2)
+    {
+        if (i2 == i1)
+        {
+            return true;
+        }
+        i2 = i2->next;
+        if (i2)
+        {
+            i2 = i2->next;
+        }
+        i1 = i1->next;   
+    }
+    return false;
+}
+
+//difference may be in time
+bool isCycle2(MyList* head)
+{
+    MyList* curNode = head;
+    MyList* savedNode = NULL;
+
+    int iter = 0;
+    int cycle = 2;
+    do
+    {
+        if(curNode == savedNode) return true;
+        if(iter >= cycle)
+        {
+            iter = 0;
+            savedNode = curNode;
+            cycle *= 2;
+        }
+        iter++;
+    }
+    while(curNode = curNode->next);
+    return false;
+}</pre><hr/><h3><pre>6. <br/>Напишите рекурсивную функцию на C или C++ вычисляющую N-ое число из последовательности Фибоначи.</pre></h3><pre>int fib(int n, int* prevFib = NULL) 
+{ 
+    int prev = 0;
+    int result = 0;   
+    if (n <= 1) 
+    {
+        result = n;
+        prev = n - 1;
+    }
+    else
+    {
+        int prevPrev = 0;
+        prev = fib(n-1, &prevPrev);
+        result = prev + prevPrev;
+    }
+    if (prevFib)
+    {
+        *prevFib = prev;
+    }
+    return result;   
+}</pre><hr/><h3><pre>7. <br/>Напишите рекурсивную функцию разворачивающую строку.</pre></h3><pre>void swp_str(std::string& s, int x, int y)
+{
+	if (x == y || x > y)
+		return;
+	else
+		swp_str(x+1, y-1);
+
+	std::swap(s[x], s[y]);
+}</pre><hr/><h3><pre>8. <br/>Какие несколько методов функционального программирования доступны в C++11?</pre></h3><pre>-</pre><hr/><h3><pre>9. <br/>Имеется 1TB файл состящий из целых чисел (одно число на строку).
+Как отсортировать этот файл самым быстрым образом, если есть только 2GB памяти?</pre></h3><pre>-</pre><hr/><h3><pre>10. <br/>Представим что есть задача создать высоко производительный (high-traffic) веб сервер на C++.
+Какие возможности мультиплексирования Вам доступны? Какие из них лучше, более эффективны и почему?
+Какие библиотеки Вы бы использовали?</pre></h3><pre>-</pre><hr/><h3><pre>11. <br/>Какие преимущества дает сомпиляция в режиме "Debug" (-O0 в gcc)</pre></h3><pre>Reduce compilation time and make debugging produce the expected results.</pre><hr/><h3><pre>12. <br/>Что означает адресно-независимый (position-independent) код (-fPIC в gcc)?
+Когда он дожен использоваться?
+C каким типом кода EXE и DLL файлы компилируются в Windows?</pre></h3><pre>-</pre><hr/><h3><pre>13. <br/>Какие оптимизации применяемые комилятором Вы знаете (например раскрутка циклов, вычисление констант и т.п.)?</pre></h3><pre><a href='https://habrahabr.ru/company/enterra/blog/250199/' target="_blank">Оптимизация</a>
+</pre><hr/></body></html>

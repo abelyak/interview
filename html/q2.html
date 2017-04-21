@@ -1,0 +1,72 @@
+<html><!DOCTYPE html><head>
+            <meta charset="utf-8">
+            <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+            </head><body><ul>
+           <li><a href="q1.html">Q1</a></li>
+           <li><a href="q2.html">Q2</a></li>
+           <li><a href="q3.html">Q3</a></li>
+           <li><a href="patterns.html">Patterns</a></li>
+           <li><a href="ipc.html">IPC</a></li>
+           <li><a href="p_sync.html">p_sync</a></li>
+           <li><a href="smart_pointers.html">SmartPointers</a></li>
+           <li><a href="http://cpp.sh" target="_blank">CPP.SH</a></li>
+           </ul><h3><pre>1. <br/>У вас есть базовый класс для всех объектов игры
+
+class game_base {
+public:
+ void timer() {};
+ void render() {};
+ .......
+}
+
+Метод таймер может быть пустым, но render должен быть специализирован для всех наследников.
+Что нужно поменять в интерфейсе класса чтобы удовлетворить этим условиям?</pre></h3><pre>нужно объявить метод render() чисто виртуальным. вот так:
+virtual void render() = 0;
+</pre><hr/><h3><pre>2. <br/>class X{};
+Какие методы создаются у объектов класса X ?</pre></h3><pre>Конструктор по умолчанию, конструктор копии, оператор присваивания, деструктор</pre><hr/><h3><pre>3. <br/>class A {};
+Что нужно сделать, чтобы объекты класса A нельзя было копировать?</pre></h3><pre>Объявить приватным конструктор копии и оператор присваивания</pre><hr/><h3><pre>4. <br/>class A_ {
+public:
+    void print ()    {  printf( "a\n" );   }
+    virtual void virtual_print ()  {  printf( "virt a\n" );  }
+};
+
+class B_: public A_ {
+public:
+    void print ()   {  printf( "b\n" );   }
+    virtual void virtual_print () {  printf( "virt b\n" );  }
+};
+
+Что распечатает следующий код?
+
+A_ *p = new B_();
+p->print();
+p->virtual_print();</pre></h3><pre>a
+virt b</pre><hr/><h3><pre>5. <br/>void func( std::vector<int>::iterator it, std::vector<int> vector )
+{
+    for( it; it != vector.end(); ++it ) {
+        std::cout << *it;
+    }
+}
+
+std::vector<int> v;
+… // Заполнение вектора
+std::vector<int>::iterator it = v.begin();
+
+func( it, v );
+
+После выполнения кода вектор v не был распечатан. Где ошибка?</pre></h3><pre>В функцию был передан итератор на другой вектор.
+Вектор передется по значению, сл. итератор будет указывать на старый векрор, а не на новый, который скопировался при вызове функции.</pre><hr/><h3><pre>6. <br/>std::vector< std::shared_ptr<int> > v_int;
+… // Заполнили значениями: 5, 1, 8
+std::sort( v_int.begin(), v_int.end() );
+
+Мы распечатали отсортированный вектор и получилось: … ?</pre></h3><pre>Мы отсортировали указатели</pre><hr/><h3><pre>7. <br/>int* get_singleton_instance()
+{ … }
+
+{
+    std::shared_ptr<int*> a = get_singleton_instance();
+    ...
+    std::shared_ptr<int*> b = get_singleton_instance();
+}
+
+В чём проблема в данном коде?</pre></h3><pre>1. Синглтон контролирует освобождение ресурса который хранит, а при удалении последнего шаредпоинтера память будет очищена.
+2. Будет 2 шаред поинтера на один и тот же ресурс, а счетчики у каждого будут равны 1.</pre><hr/></body></html>

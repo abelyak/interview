@@ -1,0 +1,508 @@
+<html><!DOCTYPE html><head>
+            <meta charset="utf-8">
+            <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+            </head><body><ul>
+           <li><a href="q1.html">Q1</a></li>
+           <li><a href="q2.html">Q2</a></li>
+           <li><a href="q3.html">Q3</a></li>
+           <li><a href="patterns.html">Patterns</a></li>
+           <li><a href="ipc.html">IPC</a></li>
+           <li><a href="p_sync.html">p_sync</a></li>
+           <li><a href="smart_pointers.html">SmartPointers</a></li>
+           <li><a href="http://cpp.sh" target="_blank">CPP.SH</a></li>
+           </ul><h3><pre>1. <br/>Сортировка вставкой O(n^2)</pre></h3><pre>void insert_sort()
+{
+    int A[10] = {5,6,1,9,4,57,1,2,3,44};
+//Начинаем с 1го элемента, т.к. всегда смотрим на один элемент назад
+    for(int i = 1; i < 10; ++i)
+    {
+        int key = A[i];
+        int j = i;
+        while( j > 0 && A[j-1] > key)
+        {
+             A[j] = A[j-1];
+             --j;
+        }
+        A[j] = key;
+    }
+
+    for(int i = 0; i < 10; ++i)
+    {
+        std::cout << "A[" << i << "] = " << A[i] << "\n";
+    }
+}</pre><hr/><h3><pre>2. <br/>Быстрая сортировка middle time O(n*log(n))</pre></h3><pre>void qSort(int* arr, int size)
+{
+    int end = size-1;
+    int begin = 0;
+    int mid = arr[(int)(size/2)];
+
+    do
+    {
+        while(arr[begin] < mid) begin++;
+        while(arr[end] < mid) end--;
+
+        if(begin <= end)
+        {
+            tmp = arr[begin];
+            arr[begin] = arr[end];
+            arr[end] = tmp;
+            begin++;
+            end--;
+        }
+    }while(begin <= end);
+
+    if(end > 0) qSort(arr, end);
+    if(begin < size) qSort(arr+begin, size-begin);
+}
+
+void quickSort(int l, int r)
+{
+    int x = a[l + (r - l) / 2];
+    //запись эквивалентна (l+r)/2, 
+    //но не вызввает переполнения на больших данных
+    int i = l;
+    int j = r;
+    //код в while обычно выносят в процедуру particle
+    while(i <= j)
+    {
+        while(a[i] < x) i++;
+        while(a[j] > x) j--;
+        if(i <= j)
+        {
+            swap(a[i], a[j]);
+            i++;
+            j--;
+        }
+    }
+    if (i < r)
+        quickSort(i, r);
+    
+    if (l < j)    
+        quickSort(l, j);    
+}</pre><hr/><h3><pre>3. <br/>Простое слияние</pre></h3><pre>void merge()
+{
+    int n = 5;
+
+    int a[5] = {1, 2, 3, 7, 8};
+    int b[5] = {4, 5, 6, 11, 12};
+    int c[10];
+    int ai = 0, bi = 0, ci = 0;
+
+    while(ai < n && bi < n)
+    {
+        if (a[ai] < b[bi])
+        {
+            c[ci] = a[ai];
+            ai++;
+        }
+        else
+        {
+            c[ci] = b[bi];
+            bi++;
+        }
+        ci++;
+    }
+
+    while (ai < n)
+    {
+        c[ci] = a[ai];
+        ai++;
+        ci++;
+    }
+
+    while (bi < n)
+    {
+        c[ci] = b[bi];
+        bi++;
+        ci++;
+    }
+
+    for (int i = 0; i < n*2; ++i)
+    {
+        qDebug() << "c[" << i << "] = " << c[i];
+    }
+}</pre><hr/><h3><pre>4. <br/>Пузырьковая сортировка O(n^2)</pre></h3><pre>void BubbleSort()
+{
+    int a[10] = {9, 2, 3, 7, 8, 4, 5, 6, 11, 12};
+
+    for(int i = 0; i < 10; i++)
+    {
+        for (int j = i; j < 10; j++)
+        {
+            if (a[i] > a[j])
+            {
+                int tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
+            }
+        }
+    }
+
+    for (int i = 0; i < 10; ++i)
+    {
+        qDebug() << "a[" << i << "] = " << a[i];
+    }
+}</pre><hr/><h3><pre>5. <br/>Бинарный поиск</pre></h3><pre>void BinSearch(int* a, size_t n, int x)
+{
+    qDebug() << "Find x = " << x;
+
+    size_t first = 0;
+    size_t last = n;
+    while (first < last)
+    {
+        size_t mid = first + (last - first) / 2;
+
+        if (x <= a[mid])
+            last = mid;
+        else
+            first = mid + 1;
+    }
+
+    if (a[last] == x)
+    {
+        qDebug() << "a[" << last << "] = " << a[last];
+    }
+    else
+    {
+        qDebug() << "Not found";
+    }
+}
+
+int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+BinSearch(a, 10, 5);</pre><hr/><h3><pre>6. <br/>Разворот списка</pre></h3><pre>class MyList
+{
+public:
+    MyList()
+    {
+        key = 10;
+    }
+
+    ~MyList()
+    {
+
+    }
+
+    MyList* next;
+
+    int key;
+};
+
+MyList* invertList(MyList* head)
+{
+    MyList* newHead = NULL;
+
+    while(true)
+    {
+        if(head == NULL)
+        {
+            return newHead;
+        }
+        MyList* tmp = head->next;
+        head->next = newHead;
+        newHead = head;
+        head = tmp;
+    }
+
+    /*
+    while(head != NULL)
+    {
+        MyList* tmp = head->next;
+        head->next = newHead;
+        newHead = head;
+        head = tmp;
+    }
+    return newHead;
+    */
+}</pre><hr/><h3><pre>7. <br/>Инвертируем строку</pre></h3><pre>template <typename T >
+void invert_string( T &a )
+{
+    T::size_type length = a.size();
+    for( T::size_type i = 0; i < (length/2); ++i )
+    {
+        std::swap( a[i], a[length - i - 1] );
+    }
+}</pre><hr/><h3><pre>8. <br/>Найти максимальную цепочку последовательных символов.
+Пример: aaabbbbbccc => bbbb</pre></h3><pre>void FindMaxChain(char* p)
+{
+    char* memP = p;
+    int maxK = 0;
+    char* cur = p;
+    char* next = p;
+    int k = 1;
+
+    do
+    {
+        next++;
+        if (*cur == *next)
+        {
+            k++;
+        }
+        else
+        {
+            if ( maxK < k)
+            {
+                maxK = k;
+                memP = cur;
+                k = 1;
+            }
+            cur = next;
+        }
+    }
+    while(*next != '\0');
+
+    for (int i = 0; i < maxK; ++i)
+    {
+        qDebug() << memP[i];
+    }
+}</pre><hr/><h3><pre>9. <br/>Подсчитать нулевые биты</pre></h3><pre>void CountNullBits(int val)
+{
+    int length = sizeof(int) * 8;
+    int count = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (!((val >> i) & 0x1))
+            count++;
+        //std::cout << ((val >> i) & 0x1);
+    }
+    std::cout << count;
+}
+
+CountNullBits(-42);</pre><hr/><h3><pre>10. <br/>Удаление повротных символов
+aaabbbccc -> abc</pre></h3><pre>void DeleteChars(char* str)
+{
+    if (*str == '\0')
+        return;
+
+    char* cur = str;
+    char* next = str;
+
+    do
+    {
+        next++;
+        if(*cur != *next )
+        {
+            cur++;
+            *cur = *next;
+        }
+    }
+    while(*next != '\0');
+
+    while(*str != '\0')
+    {
+        qDebug() << *str;
+        str++;
+    }
+}
+
+std::string a = "A_B_C";
+char* p = const_cast<char*>(a.c_str());
+DeleteChars(p);</pre><hr/><h3><pre>11. <br/>Распечатать биты в байте</pre></h3><pre>void PrintBits(int val)
+{
+    int length = sizeof(int) * 8 - 1;
+
+    for (int i = length; i >= 0; --i)
+    {
+        std::cout << ((val >> i) & 0x1);
+    }
+}
+
+PrintBits(-42);</pre><hr/><h3><pre>12. <br/>Задачка яндекса</pre></h3><pre>void Yandex()
+{
+    int i;
+    int n = 20;
+    /*
+    for (i = 0; (-)i < n; i--)
+    {
+        qDebug() << "-" << i;
+    }
+    */
+    /*
+    for (i = 0; i < n; (n)--)
+    {
+        qDebug() << "-" << i << n;
+    }
+    */
+    /*
+    for (i = 0; i (+) n; i--)
+    {
+        qDebug() << "-" << i << n;
+    }
+    */
+}</pre><hr/><h3><pre>13. <br/>Uni word</pre></h3><pre>union UniDWord
+{
+    char  byte[4];
+    int dword;
+    float floatingPoint;
+};</pre><hr/><h3><pre>14. <br/>Распечатаем строку</pre></h3><pre>void printString(char* p)
+{
+    int i = 0;
+
+    while(*p != '\0')
+    {
+        qDebug() << *p;
+        p++;
+        i++;
+    }
+    qDebug() << "count = " << i;
+}</pre><hr/><h3><pre>15. <br/>Удаление из списка с указанием на произвольный элемент.
+Сделать это в большенстве случаев неполучится.
+Корректно работает только в малых ситуациях.</pre></h3><pre>void deleteFromList(MyList* curr)
+{
+    /*
+    do
+    {
+        MyList* next = curr->next;
+        std::swap(*curr, *next);
+        next->next = curr->next;
+        curr->next = next;
+
+        if (next->next == NULL)
+        {
+            curr->next = NULL;
+            delete next;
+            return;
+        }
+        curr = next;
+    }
+    while(true);
+    */
+
+    MyList* next = curr->next;
+    std::swap(*curr, *next);
+    delete next;
+}
+
+// Example program
+#include < iostream >
+#include < string >
+
+class MyList{
+public:
+    MyList(int i)
+	{
+        key = i;
+    }
+
+    ~MyList()
+    {
+
+    }
+
+    MyList* next;
+
+    int key;
+};
+
+int main()
+{
+    MyList* a = new MyList(1);
+    MyList* b = new MyList(2);
+    MyList* c = new MyList(3);
+    MyList* d = new MyList(4);
+    MyList* e = new MyList(5);
+
+    a->next = b;
+    b->next = c;
+    c->next = d;
+    d->next = NULL;
+
+    MyList* curr = a;
+    do
+    {
+        std::cout << curr->key << " ";
+    }while(curr = curr->next);
+
+    curr = d;
+
+    MyList* next = curr->next;
+    std::swap(*curr, *next);
+    delete next;
+
+    curr = a;
+    do
+    {
+        std::cout << curr->key << " ";
+    }while(curr = curr->next);
+
+    delete a;
+    //delete b;
+    delete c;
+    delete d;
+    delete e;
+
+    return 0;
+}
+</pre><hr/><h3><pre>16. <br/>Перевод строки в число</pre></h3><pre>int atoi(char s[])
+{
+    int i = 0, n = 0;
+
+    for(; '0' =< s[i] && s[i] <= '9'; ++i)
+    {
+       n = n*10 + (s[i] - '0');
+    }
+
+    return n;
+}</pre><hr/><h3><pre>17. <br/>Шаблонный конструктор с непонятным вызовом</pre></h3><pre>// Example program
+#include < iostream >
+#include < string >
+
+class A
+{
+public:
+    template <typename T>
+    A(int x)
+    {
+        T t;
+        std::cout << t << "\n";
+    }
+};
+
+int main()
+{
+/*
+При вызове конструктора, нам синтаксически некуда вписать его аргумент (см. пример выше),
+поэтому конструктор нужно писать так, чтобы компилятор мог угадать тип.
+То есть его аргумент должен определять аргумент шаблона. Тоже самое с оператором присваивания.
+Не бывает шаблонных деструкторов, конструкторов по умолчанию, потому что парметров нет - угадать нельзя, а синтаксически писать некуда.
+*/
+    A qwe(5); // не сработает
+}</pre><hr/><h3><pre>18. <br/>Можно ли определить чисто виртуальную функцию в том же классе? Да можно.
+При это компилятор всеравно будет ругаться, если попытаться создать объект этого класса.
+Можно даже выжвать, создав объект производно класса.</pre></h3><pre>// Example program
+#include < iostream >
+#include < string >
+
+class PureVirt
+{
+public:
+    virtual void foo() = 0;
+};
+
+void PureVirt::foo()
+{
+    std::cout << "PureVirt::foo()\n";
+}
+
+class Virt: public PureVirt
+{
+public:
+    void foo();
+};
+
+void Virt::foo()
+{
+    std::cout << "Virt::foo()\n";
+}
+
+int main()
+{
+    PureVirt* pv = new Virt;
+    pv->foo();
+    pv->PureVirt::foo();
+    delete pv;
+
+    return 0;
+}
+
+</pre><hr/></body></html>
