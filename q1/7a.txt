@@ -1,0 +1,9 @@
+void swp_str(std::string& s, int x, int y)
+{
+	if (x == y || x > y)
+		return;
+	else
+		swp_str(x+1, y-1);
+
+	std::swap(s[x], s[y]);
+}

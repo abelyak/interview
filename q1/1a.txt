@@ -1,0 +1,15 @@
+struct Man
+{
+    char name;
+    int age;
+    char sex;
+    int weight;
+};
+
+Man a;
+Man b;
+
+if(a.name == b.name && a.age == b.age && a.sex == b.sex && a.weight == b.weight)
+{
+    std::cout << “equal”;
+}

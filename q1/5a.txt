@@ -1,0 +1,52 @@
+class MyList
+{
+public:
+    MyList* next;
+    MyList(): next(NULL)
+    {}
+};
+
+bool isCycle(MyList* head)
+{
+    MyList* i1 = head;
+    MyList* i2 = head->next;
+    //i2 бежит в 2 раза быстрее чем i1
+    
+    while (NULL != i2)
+    {
+        if (i2 == i1)
+        {
+            return true;
+        }
+        i2 = i2->next;
+        if (i2)
+        {
+            i2 = i2->next;
+        }
+        i1 = i1->next;   
+    }
+    return false;
+}
+
+//difference may be in time
+bool isCycle2(MyList* head)
+{
+    MyList* curNode = head;
+    MyList* savedNode = NULL;
+
+    int iter = 0;
+    int cycle = 2;
+    do
+    {
+        if(curNode == savedNode) return true;
+        if(iter >= cycle)
+        {
+            iter = 0;
+            savedNode = curNode;
+            cycle *= 2;
+        }
+        iter++;
+    }
+    while(curNode = curNode->next);
+    return false;
+}

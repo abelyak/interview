@@ -1,0 +1,21 @@
+int fib(int n, int* prevFib = NULL) 
+{ 
+    int prev = 0;
+    int result = 0;   
+    if (n <= 1) 
+    {
+        result = n;
+        prev = n - 1;
+    }
+    else
+    {
+        int prevPrev = 0;
+        prev = fib(n-1, &prevPrev);
+        result = prev + prevPrev;
+    }
+    if (prevFib)
+    {
+        *prevFib = prev;
+    }
+    return result;   
+}
