@@ -1,0 +1,17 @@
+class A_ {
+public:
+    void print ()    {  printf( "a\n" );   }
+    virtual void virtual_print ()  {  printf( "virt a\n" );  }
+};
+
+class B_: public A_ {
+public:
+    void print ()   {  printf( "b\n" );   }
+    virtual void virtual_print () {  printf( "virt b\n" );  }
+};
+
+Что распечатает следующий код?
+
+A_ *p = new B_();
+p->print();
+p->virtual_print();

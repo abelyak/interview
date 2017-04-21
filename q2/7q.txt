@@ -1,0 +1,10 @@
+int* get_singleton_instance()
+{ … }
+
+{
+    std::shared_ptr<int*> a = get_singleton_instance();
+    ...
+    std::shared_ptr<int*> b = get_singleton_instance();
+}
+
+В чём проблема в данном коде?

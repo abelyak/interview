@@ -1,0 +1,14 @@
+void func( std::vector<int>::iterator it, std::vector<int> vector )
+{
+    for( it; it != vector.end(); ++it ) {
+        std::cout << *it;
+    }
+}
+
+std::vector<int> v;
+… // Заполнение вектора
+std::vector<int>::iterator it = v.begin();
+
+func( it, v );
+
+После выполнения кода вектор v не был распечатан. Где ошибка?
