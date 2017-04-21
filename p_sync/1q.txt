@@ -1,0 +1,21 @@
+Средства синхронизации:
+
+Атомарные переменные(атомики)
+
+Условные переменные
+
+Сигналы
+
+Мьютексы
+	Мьютекс это не двоичный семафор
+	Мьютекс лочится тем же процессом, что и анлочится.
+	
+Семафоры
+	Для семафоров есть один процесс который посылает сигнал, другой принимает
+	
+http://linux.vt.tpu.ru/threads/index.html
+http://learnc.info/c/pthreads_semaphores.html
+http://learnc.info/c/pthreads_mutex_introduction.html
+http://preshing.com/
+https://habrahabr.ru/post/261273/
+https://www.justsoftwaresolutions.co.uk/threading/locks-mutexes-semaphores.html
