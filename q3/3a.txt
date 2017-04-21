@@ -1,0 +1,43 @@
+void merge()
+{
+    int n = 5;
+
+    int a[5] = {1, 2, 3, 7, 8};
+    int b[5] = {4, 5, 6, 11, 12};
+    int c[10];
+    int ai = 0, bi = 0, ci = 0;
+
+    while(ai < n && bi < n)
+    {
+        if (a[ai] < b[bi])
+        {
+            c[ci] = a[ai];
+            ai++;
+        }
+        else
+        {
+            c[ci] = b[bi];
+            bi++;
+        }
+        ci++;
+    }
+
+    while (ai < n)
+    {
+        c[ci] = a[ai];
+        ai++;
+        ci++;
+    }
+
+    while (bi < n)
+    {
+        c[ci] = b[bi];
+        bi++;
+        ci++;
+    }
+
+    for (int i = 0; i < n*2; ++i)
+    {
+        qDebug() << "c[" << i << "] = " << c[i];
+    }
+}

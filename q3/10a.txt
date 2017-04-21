@@ -1,0 +1,29 @@
+void DeleteChars(char* str)
+{
+    if (*str == '\0')
+        return;
+
+    char* cur = str;
+    char* next = str;
+
+    do
+    {
+        next++;
+        if(*cur != *next )
+        {
+            cur++;
+            *cur = *next;
+        }
+    }
+    while(*next != '\0');
+
+    while(*str != '\0')
+    {
+        qDebug() << *str;
+        str++;
+    }
+}
+
+std::string a = "A_B_C";
+char* p = const_cast<char*>(a.c_str());
+DeleteChars(p);

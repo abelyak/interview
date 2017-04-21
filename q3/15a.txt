@@ -1,0 +1,86 @@
+void deleteFromList(MyList* curr)
+{
+    /*
+    do
+    {
+        MyList* next = curr->next;
+        std::swap(*curr, *next);
+        next->next = curr->next;
+        curr->next = next;
+
+        if (next->next == NULL)
+        {
+            curr->next = NULL;
+            delete next;
+            return;
+        }
+        curr = next;
+    }
+    while(true);
+    */
+
+    MyList* next = curr->next;
+    std::swap(*curr, *next);
+    delete next;
+}
+
+// Example program
+#include < iostream >
+#include < string >
+
+class MyList{
+public:
+    MyList(int i)
+	{
+        key = i;
+    }
+
+    ~MyList()
+    {
+
+    }
+
+    MyList* next;
+
+    int key;
+};
+
+int main()
+{
+    MyList* a = new MyList(1);
+    MyList* b = new MyList(2);
+    MyList* c = new MyList(3);
+    MyList* d = new MyList(4);
+    MyList* e = new MyList(5);
+
+    a->next = b;
+    b->next = c;
+    c->next = d;
+    d->next = NULL;
+
+    MyList* curr = a;
+    do
+    {
+        std::cout << curr->key << " ";
+    }while(curr = curr->next);
+
+    curr = d;
+
+    MyList* next = curr->next;
+    std::swap(*curr, *next);
+    delete next;
+
+    curr = a;
+    do
+    {
+        std::cout << curr->key << " ";
+    }while(curr = curr->next);
+
+    delete a;
+    //delete b;
+    delete c;
+    delete d;
+    delete e;
+
+    return 0;
+}

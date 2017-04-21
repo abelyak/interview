@@ -1,0 +1,12 @@
+void printString(char* p)
+{
+    int i = 0;
+
+    while(*p != '\0')
+    {
+        qDebug() << *p;
+        p++;
+        i++;
+    }
+    qDebug() << "count = " << i;
+}

@@ -1,0 +1,45 @@
+class MyList
+{
+public:
+    MyList()
+    {
+        key = 10;
+    }
+
+    ~MyList()
+    {
+
+    }
+
+    MyList* next;
+
+    int key;
+};
+
+MyList* invertList(MyList* head)
+{
+    MyList* newHead = NULL;
+
+    while(true)
+    {
+        if(head == NULL)
+        {
+            return newHead;
+        }
+        MyList* tmp = head->next;
+        head->next = newHead;
+        newHead = head;
+        head = tmp;
+    }
+
+    /*
+    while(head != NULL)
+    {
+        MyList* tmp = head->next;
+        head->next = newHead;
+        newHead = head;
+        head = tmp;
+    }
+    return newHead;
+    */
+}

@@ -1,0 +1,36 @@
+// Example program
+#include < iostream >
+#include < string >
+
+class PureVirt
+{
+public:
+    virtual void foo() = 0;
+};
+
+void PureVirt::foo()
+{
+    std::cout << "PureVirt::foo()\n";
+}
+
+class Virt: public PureVirt
+{
+public:
+    void foo();
+};
+
+void Virt::foo()
+{
+    std::cout << "Virt::foo()\n";
+}
+
+int main()
+{
+    PureVirt* pv = new Virt;
+    pv->foo();
+    pv->PureVirt::foo();
+    delete pv;
+
+    return 0;
+}
+

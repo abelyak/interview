@@ -1,0 +1,1 @@
+Быстрая сортировка middle time O(n*log(n))

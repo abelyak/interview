@@ -1,0 +1,33 @@
+void FindMaxChain(char* p)
+{
+    char* memP = p;
+    int maxK = 0;
+    char* cur = p;
+    char* next = p;
+    int k = 1;
+
+    do
+    {
+        next++;
+        if (*cur == *next)
+        {
+            k++;
+        }
+        else
+        {
+            if ( maxK < k)
+            {
+                maxK = k;
+                memP = cur;
+                k = 1;
+            }
+            cur = next;
+        }
+    }
+    while(*next != '\0');
+
+    for (int i = 0; i < maxK; ++i)
+    {
+        qDebug() << memP[i];
+    }
+}

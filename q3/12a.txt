@@ -1,0 +1,23 @@
+void Yandex()
+{
+    int i;
+    int n = 20;
+    /*
+    for (i = 0; (-)i < n; i--)
+    {
+        qDebug() << "-" << i;
+    }
+    */
+    /*
+    for (i = 0; i < n; (n)--)
+    {
+        qDebug() << "-" << i << n;
+    }
+    */
+    /*
+    for (i = 0; i (+) n; i--)
+    {
+        qDebug() << "-" << i << n;
+    }
+    */
+}

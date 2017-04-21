@@ -1,0 +1,15 @@
+void CountNullBits(int val)
+{
+    int length = sizeof(int) * 8;
+    int count = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (!((val >> i) & 0x1))
+            count++;
+        //std::cout << ((val >> i) & 0x1);
+    }
+    std::cout << count;
+}
+
+CountNullBits(-42);

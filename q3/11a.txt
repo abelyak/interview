@@ -1,0 +1,11 @@
+void PrintBits(int val)
+{
+    int length = sizeof(int) * 8 - 1;
+
+    for (int i = length; i >= 0; --i)
+    {
+        std::cout << ((val >> i) & 0x1);
+    }
+}
+
+PrintBits(-42);

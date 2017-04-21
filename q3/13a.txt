@@ -1,0 +1,6 @@
+union UniDWord
+{
+    char  byte[4];
+    int dword;
+    float floatingPoint;
+};

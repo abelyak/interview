@@ -1,0 +1,50 @@
+void qSort(int* arr, int size)
+{
+    int end = size-1;
+    int begin = 0;
+    int mid = arr[(int)(size/2)];
+
+    do
+    {
+        while(arr[begin] < mid) begin++;
+        while(arr[end] < mid) end--;
+
+        if(begin <= end)
+        {
+            tmp = arr[begin];
+            arr[begin] = arr[end];
+            arr[end] = tmp;
+            begin++;
+            end--;
+        }
+    }while(begin <= end);
+
+    if(end > 0) qSort(arr, end);
+    if(begin < size) qSort(arr+begin, size-begin);
+}
+
+void quickSort(int l, int r)
+{
+    int x = a[l + (r - l) / 2];
+    //запись эквивалентна (l+r)/2, 
+    //но не вызввает переполнения на больших данных
+    int i = l;
+    int j = r;
+    //код в while обычно выносят в процедуру particle
+    while(i <= j)
+    {
+        while(a[i] < x) i++;
+        while(a[j] > x) j--;
+        if(i <= j)
+        {
+            swap(a[i], a[j]);
+            i++;
+            j--;
+        }
+    }
+    if (i < r)
+        quickSort(i, r);
+    
+    if (l < j)    
+        quickSort(l, j);    
+}
